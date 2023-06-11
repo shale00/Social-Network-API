@@ -15,7 +15,7 @@ const userSchema = new Schema(
       unique: true,
       validate: {
         validator: function (v) {
-          return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
+          return /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
         },
         message: (props) => `${props.value} is not a valid email address!`,
       },
@@ -29,7 +29,7 @@ const userSchema = new Schema(
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: this, //or userShema or 'User' ?
+        ref: this,
       },
     ],
   },
@@ -45,7 +45,7 @@ const userSchema = new Schema(
 userSchema
   .virtual("friendCount")
   .get(function () {
-    return `${this.friends}`;
+    return this.friends.length;
   })
   .set(function (v) {
     const friendCount = v.length;
