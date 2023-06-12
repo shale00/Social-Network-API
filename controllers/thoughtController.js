@@ -93,13 +93,13 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Create reaction
+  // Create reaction on a thought
   async createReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body } },
-        { runValidators: true, new: true }
+        { new: true }
       );
 
       if (!thought) {
@@ -113,11 +113,12 @@ module.exports = {
   },
   // Delete reaction by ID
   async deleteReaction(req, res) {
+    
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { reactionId: req.params.reactionId } } },
-        { runValidators: true, new: true }
+        { $pull: { reactions: { _id: req.params.reactionId } } },
+        { new: true }
       );
 
       if (!thought) {
