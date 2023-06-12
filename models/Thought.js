@@ -15,8 +15,17 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: () => Date.now,
-      // TODO: Use a getter method to format the timestamp on query
+      default: Date.now,
+      get: function (timestamp) {
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit",
+        };
+        return new Date(timestamp).toLocaleString("en-US", options);
+      },
     },
     username: {
       type: String,
@@ -28,25 +37,29 @@ const thoughtSchema = new Schema(
           type: Schema.Types.ObjectId,
           default: () => new Types.ObjectId(),
         },
-        reactionBody: {
+        reactionText: {
           type: String,
           required: true,
           max: 280,
-          // validate: {
-          //   validator: function (v) {
-          //     return /^.{0,280}$/.test(v);
-          //   },
-          //   message: (props) =>
-          //     `${props.value} is not a valid character amount!`,
-          // },
         },
         username: {
           type: String,
           required: true,
         },
-        createAt: {
+        createdAt: {
           type: Date,
           default: Date.now,
+          get: function (timestamp) {
+            const options = {
+              hour: "2-digit",
+              minute: "2-digit",
+              day: "2-digit",
+              month: "2-digit",
+              year: "2-digit",
+            };
+
+            return new Date(timestamp).toLocaleString("en-US", options);
+          },
         },
       },
     ],

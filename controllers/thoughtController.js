@@ -13,7 +13,7 @@ module.exports = {
   // Get single thought by ID
   async getSingleThought(req, res) {
     try {
-      const thought = await Thought.findOne({ _id: req.params.userId });
+      const thought = await Thought.findOne({ _id: req.params.thoughtId });
 
       if (!thought) {
         return res.status(404).json({ message: "No thought with that ID" });
@@ -73,11 +73,11 @@ module.exports = {
       });
 
       if (!thought) {
-        return res.status(404).json({ message: "No user with this ID!" });
+        return res.status(404).json({ message: "No thought with this ID!" });
       }
 
       const user = await User.findOneAndUpdate(
-        { _id: req.params.thoughtId },
+        { thoughts: req.params.thoughtId },
         { $pull: { thoughts: req.params.thoughtId } },
         { new: true }
       );
@@ -103,7 +103,7 @@ module.exports = {
       );
 
       if (!thought) {
-        return res.status(404).json({ message: "No user with this ID!" });
+        return res.status(404).json({ message: "No thought with this ID!" });
       }
 
       res.json(thought);
@@ -116,12 +116,12 @@ module.exports = {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { responseId: req.params.responseId } } },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       );
 
       if (!thought) {
-        return res.status(404).json({ message: "No user with this ID!" });
+        return res.status(404).json({ message: "No thought with this ID!" });
       }
 
       res.json(thought);
