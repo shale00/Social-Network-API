@@ -23,7 +23,7 @@ router
 // /api/thoughts/:thoughtId/reactions
 router.route("/:thoughtId/reactions").post(createThought);
 
-// /api/videos/:thoughtId/reactions/:reactionId
+// /api/thoughts/:thoughtId/reactions/:reactionId
 router
   .route("/:thoughtId/reactions/:reactionId")
   .post(createReaction)

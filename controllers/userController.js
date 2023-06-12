@@ -49,7 +49,7 @@ module.exports = {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { user: res.json },
+        { $set: req.body },
         { new: true }
       );
       res.json(user);
