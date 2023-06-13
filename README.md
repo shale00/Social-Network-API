@@ -15,10 +15,14 @@
   * [Questions](#questions)
   
   ## Installation
-  N/A
+  You will need MongoDB and node installed on your pc to run this app.
 
   ## Usage
   Invoke the app by entering the command 'node index.js' in the terminal. Then using an API dev environment tool, test the routes as shown below:
+
+
+
+https://github.com/shale00/Social-Network-API/assets/123425315/9b5cd8bf-cad0-4ca5-95a9-224a7c2e68b2
 
 
   ## Credits
